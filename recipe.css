@@ -12,6 +12,7 @@ h1 {
     font-size: 22pt;
     font-weight: bold;
     text-decoration: underline;
+    letter-spacing: 2em;
 }
 
 header > h1 {
@@ -24,4 +25,8 @@ a:link, a:visited, a:hover, a:active {
 
 blockquote {
     background-color: #A4A410;
+}
+
+ul {
+    list-style-image: url('/images/pie_bullet.png');
 }
