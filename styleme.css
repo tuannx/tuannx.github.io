@@ -1,0 +1,61 @@
+* {
+    color: blue;
+    background-color: white;
+    font-family: Tahoma;
+    text-align-all: center;
+}
+
+h1 {
+    color: darkblue;
+    background-color: white;
+}
+section#mood > div{
+    display: flex;
+    align-items: center; /* align vertical */
+}
+.mood {
+    width: 200px;
+    height: 300px;
+}
+img#positive {
+    width: 300px;
+}
+
+em {
+    text-shadow: -5px 5px 10px rgba(206,89,55,0.5);
+}
+
+q {
+    color: red;
+    background-color: white;
+}
+
+dl dt {
+    color: deepskyblue;
+    font-weight: bold;
+}
+/* unvisited link */
+a:link {
+    color: #FF0000;
+}
+
+/* visited link */
+a:visited {
+    color: #00FF00;
+}
+
+/* mouse over link */
+a:hover {
+    color: #FF00FF;
+}
+
+/* selected link */
+a:active {
+    color: #0000FF;
+}
+
+p:first-letter {
+    float: left;
+    font-size: 1.5rem;
+    margin: -0.3em 0.1em 0.2em 0;
+}
