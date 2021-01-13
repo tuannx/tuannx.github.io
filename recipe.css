@@ -1,0 +1,27 @@
+body {
+    color: #404040;
+    font-size: 11pt;
+    font-family: Georgia, Garamond, Tahoma;
+    background-image: url("/images/silverware.jpg");
+}
+
+h1 {
+    color: #A4A400;
+    background-color: #F0F0F0;
+    font-family: "Lucida Sans Unicode", Helvetica, Arial, Tahoma;
+    font-size: 22pt;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+header > h1 {
+    text-align: center;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: #A4A400;
+}
+
+blockquote {
+    background-color: #A4A410;
+}
