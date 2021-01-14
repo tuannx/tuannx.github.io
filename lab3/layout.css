@@ -1,0 +1,52 @@
+body {
+    background-image: url("images/background.gif");
+    background-repeat: repeat;
+}
+.wrapper {
+    background-color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 10px solid white;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+header{
+    overflow: auto;
+    background-color: #A8F0F0;
+}
+header h1,header h2 {
+    float: right;
+    clear: both;
+}
+header h2 {
+    font-size: 14pt;
+}
+nav {
+    float: left;
+    width: 25%;
+    border: 10px solid #3b88da;
+    border-radius: 25px;
+    background-color: #C2E9E9;
+    box-sizing: border-box;
+}
+nav h1 {
+    padding-left: 10px;
+}
+article {
+    background-color: #E8FBFB;
+    padding: 5px;
+    margin-top: 10px;
+    border: 4px solid #C2E9E9;
+    border-radius: 15px;
+    overflow: auto;
+    margin-left: 27%;
+}
+article .image {
+    float: right;
+}
+article .article-date {
+    border-bottom: 2px dashed blue;
+}

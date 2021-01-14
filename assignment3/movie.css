@@ -1,0 +1,93 @@
+body {
+    background-image: url("./skeleton_files/background.png");
+    background-repeat: repeat;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 8pt;
+    padding: 0px;
+    margin: 0px;
+}
+.banner {
+    background-image: url("./skeleton_files/bannerbg.png");
+    background-repeat: repeat-x;
+    text-align: center;
+}
+h1 {
+    font-size: 24pt;
+    font-weight: bold;
+    text-shadow: 3px 3px #999999;
+    text-align: center;
+}
+.main {
+    width: 800px;
+    margin: auto;
+}
+.main_section {
+    border: 4px solid gray;
+    border-radius: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-image: url("./skeleton_files/rbg.png");
+    background-repeat: repeat-x;
+    position: relative;
+}
+.right {
+    float: right;
+    width: 250px;
+    background-color: #A2B964;
+}
+.right div {
+    float: right;
+}
+.right dl {
+    margin-top: 416px;
+    margin-left: 10px;
+    padding: 2px;
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+}
+.right dl dt {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.right ul {
+    padding-inline-start: 0px;
+}
+.right ul li {
+    list-style: none;
+}
+.rotten img{
+    float: left;
+}
+.rotten span {
+    display: inline-block;
+    height: 83px;
+    line-height: 83px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: red;
+}
+.reviews {
+    width: 34%;
+    float: left;
+    overflow: auto;
+}
+.reviews div {
+    margin: 6px;
+}
+.reviews div p:nth-child(odd) {
+    border: 2px solid gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.reviews div p:nth-child(even) {
+     margin: 2px;
+     box-sizing: border-box;
+     overflow: hidden;
+ }
+.paging{
+    position: absolute;
+    bottom: 0px;
+    padding: 0px 40%;
+    background-color: #A2B964;
+}
