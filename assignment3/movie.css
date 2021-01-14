@@ -71,6 +71,12 @@ h1 {
     float: left;
     overflow: auto;
 }
+.reviews p {
+    padding: 5px;
+}
+.reviews p img {
+    float: left;
+}
 .reviews div {
     margin: 6px;
 }
