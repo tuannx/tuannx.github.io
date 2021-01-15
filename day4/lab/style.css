@@ -1,0 +1,30 @@
+label, fieldset {
+    margin-top: 10px;
+}
+label, input {
+    display: block;
+    width: 100%;
+    padding: 3px;
+}
+label input {
+    height: 25px;
+}
+select {
+    height: 35px;
+}
+fieldset {
+    border-width: 0;
+}
+fieldset div {
+    width: 33%;
+    float: left;
+}
+fieldset label,fieldset input {
+    display: inline;
+    width: auto;
+    height: 25px;
+}
+div {
+    width: 960px;
+    margin: auto;
+}
