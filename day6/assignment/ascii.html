@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CS472 ASCII Animation viewer</title>
+  <link href="ascii.css" rel="stylesheet">
+  <script src="animations.js"></script>
+  <script src="ascii.js"></script>
+</head>
+<body>
+<div id="title">CS472 ASCII Animation viewer</div>
+<div id="mainView"><textarea name="" id="viewer" cols="80" rows="20"></textarea></div>
+<div id="control">
+  <fieldset>
+    <legend>Play controls:</legend>
+    <button id="startBtn">start</button>
+    <button id="stopBtn">stop</button>
+  </fieldset>
+  <fieldset>
+    <legend>Animations:</legend>
+    <select id="animations">
+      <option value="Blank">Blank</option>
+      <option value="Custom">Custom</option>
+      <option value="Exercise">Exercise</option>
+      <option value="Juggler">Juggler</option>
+      <option value="Bike">Bike</option>
+      <option value="Dive">Dive</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>Size:</legend>
+    <select id="size">
+      <option value="7pt">Tiny</option>
+      <option value="10pt">Small</option>
+      <option value="12pt">Medium</option>
+      <option value="16pt">Large</option>
+      <option value="24pt">Extra Large</option>
+      <option value="32pt">XXL</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>Speed:</legend>
+    <input type="checkbox" id="speed" name="speed">
+    <label for="speed">Turbo</label>
+  </fieldset>
+</div>
+<footer style="margin-top: 2em">
+  <a href="/">Home</a>
+  <br />
+  <script>
+    let encodedCurrentUrl = encodeURIComponent(window.location);
+  </script>
+  <a href="javascript:void(window.open('https://validator.w3.org/check?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-html.png" alt="html validator" referrerpolicy="no-referrer-when-downgrade">
+  </a>
+  <a  href="javascript:void(window.open('https://jigsaw.w3.org/css-validator/validator?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-css.png" alt="css validator" referrerpolicy="no-referrer-when-downgrade" width="88" height="31">
+  </a>
+</footer>
+</body>
+</html>

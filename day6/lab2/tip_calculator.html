@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)http://mumstudents.org/cs472/2019-03-RS/Lectures/js10/tip.html -->
+<html><!--
+	CSE 190M, Summer 2012
+	This file is a tip calculator page using JavaScript.
+	-->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Tip Calculator</title>
+  <link href="./tip.css" rel="stylesheet">
+  <script src="calculator.js"></script>
+</head>
+
+
+<body>
+<h1>
+  <img id="logo" src="./calc.jpg" alt="++--**//">
+  Tip Calculator
+</h1>
+
+<div>
+  <label><input id="subtotal" type="text"> $ Subtotal</label>
+</div>
+
+<div>
+  <label><input id="tip" type="text"> % Tip</label>
+</div>
+
+<div>
+  <button id="btn">Calculate Tip</button>
+  <button id="clearBtn">Clear</button>
+</div>
+
+<hr>
+
+<div>
+  <h2>Your total:</h2>
+  <p id="total">$0.00</p>
+</div>
+
+<footer style="margin-top: 2em">
+  <a href="/">Home</a>
+  <br />
+  <script>
+    let encodedCurrentUrl = encodeURIComponent(window.location);
+  </script>
+  <a href="javascript:void(window.open('https://validator.w3.org/check?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-html.png" alt="html validator" referrerpolicy="no-referrer-when-downgrade">
+  </a>
+  <a  href="javascript:void(window.open('https://jigsaw.w3.org/css-validator/validator?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-css.png" alt="css validator" referrerpolicy="no-referrer-when-downgrade" width="88" height="31">
+  </a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+body {
+    background-color: #CCCCFF;
+    font-family: sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+}
+#title {
+    font-size: 32pt;
+    text-align: center;
+}
+#mainView {
+    text-align: center;
+}
+#viewer {
+    height: 400px;
+    width: 90%;
+    font-size: 12pt;
+    font-family: monospace;
+}
+#control {
+    text-align: center;
+}
+fieldset {
+    border: 5px solid black;
+    display: inline-block;
+}

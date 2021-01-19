@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+  <title>Alarm</title>
+  <link href="./alarm.css" type="text/css" rel="stylesheet">
+  <script src="./alarm.js"></script>
+</head>
+
+<body>
+<h1>
+  <img id="logo" src="./timer.gif" width="150px" height="150px" alt="UW CSE logo">
+  Timer Alarm
+</h1>
+
+<div>
+  <input id="min" type="text"> min
+</div>
+
+<div>
+  <input id="sec" type="text"> sec
+</div>
+
+<div>
+  <button id="go">Go</button>
+</div>
+<footer style="margin-top: 2em">
+  <a href="/">Home</a>
+  <br />
+  <script>
+    let encodedCurrentUrl = encodeURIComponent(window.location);
+  </script>
+  <a href="javascript:void(window.open('https://validator.w3.org/check?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-html.png" alt="html validator" referrerpolicy="no-referrer-when-downgrade">
+  </a>
+  <a  href="javascript:void(window.open('https://jigsaw.w3.org/css-validator/validator?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-css.png" alt="css validator" referrerpolicy="no-referrer-when-downgrade" width="88" height="31">
+  </a>
+</footer>
+</body>
+</html>

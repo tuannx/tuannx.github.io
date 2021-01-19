@@ -211,5 +211,18 @@
     </div>
   </div>
 </div>
+<footer style="margin-top: 2em">
+  <a href="/">Home</a>
+  <br />
+  <script>
+    let encodedCurrentUrl = encodeURIComponent(window.location);
+  </script>
+  <a href="javascript:void(window.open('https://validator.w3.org/check?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-html.png" alt="html validator" referrerpolicy="no-referrer-when-downgrade">
+  </a>
+  <a  href="javascript:void(window.open('https://jigsaw.w3.org/css-validator/validator?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="w3c-css.png" alt="css validator" referrerpolicy="no-referrer-when-downgrade" width="88" height="31">
+  </a>
+</footer>
 </body>
 </html>
