@@ -49,9 +49,6 @@ h1 {
     margin-top: 10px;
     font-weight: bold;
 }
-.right ul {
-    padding-inline-start: 0px;
-}
 .right ul li {
     list-style: none;
 }

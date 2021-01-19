@@ -23,6 +23,8 @@ header h1,header h2 {
 }
 header h2 {
     font-size: 14pt;
+    float: right;
+    clear: both;
 }
 nav {
     float: left;
