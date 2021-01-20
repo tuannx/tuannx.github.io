@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CS472 Bank account</title>
+  <script src="account_maker.js"></script>
+  <script src="bank_manager.js"></script>
+</head>
+<body>
+<div id="title">CS472 Bank account</div>
+<div id="control">
+  Account name: <input id="accountName" name="accountName"><br/>
+  Deposit: <input id="amount" name="amount"><br/>
+  <button id="createBtn">Create new account</button><br/>
+  <textarea name="viewer" id="viewer" cols="80" rows="20"></textarea>
+</div>
+<footer style="margin-top: 2em">
+  <a href="/">Home</a>
+  <br/>
+  <script>
+    let encodedCurrentUrl = encodeURIComponent(window.location);
+  </script>
+  <a href="javascript:void(window.open('https://validator.w3.org/check?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="/w3c-html.png" alt="html validator" referrerpolicy="no-referrer-when-downgrade">
+  </a>
+  <a href="javascript:void(window.open('https://jigsaw.w3.org/css-validator/validator?uri='+encodedCurrentUrl, '_blank'));">
+    <img src="/w3c-css.png" alt="css validator" referrerpolicy="no-referrer-when-downgrade" width="88" height="31">
+  </a>
+</footer>
+</body>
+</html>
