@@ -50,7 +50,7 @@
 
     function loadComments(btn) {
       this.disabled = true;
-      fetch(`http://jsonplaceholder.typicode.com/comments?postId=${this.dataset.postId}`)
+      fetch(`https://jsonplaceholder.typicode.com/comments?postId=${this.dataset.postId}`)
           .then(res => res.json())
           .then(buildComments)
           .catch(console.error);
