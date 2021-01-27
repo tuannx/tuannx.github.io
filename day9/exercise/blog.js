@@ -27,7 +27,7 @@
       console.log(profile);
       profileDiv.insertAdjacentHTML('beforeend', `<div class="module">
                 <h2>${profile.name}</h2>
-                <p>Website: <a href="${profile.website}">${profile.website}</a></p>
+                <p>Website: <a href="//${profile.website}">${profile.website}</a></p>
               </div>
             `);
     }
