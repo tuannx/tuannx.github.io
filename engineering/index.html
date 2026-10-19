@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Notes — Xuan Tuan Nguyen</title>
+<meta name="description" content="Tuyển chọn các bài viết so sánh chuyên sâu về Java/JVM, kiến trúc, hiệu năng, trade-off và POC — từ engineering blog của các công ty product lớn, nhiều năm qua.">
+<style>
+:root{--bg:#fbfbf9;--ink:#1b1b1b;--muted:#6a6a66;--line:#e6e6e0;--accent:#0b5fff;--card:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1113;--ink:#e9e9e6;--muted:#9aa0a6;--line:#262a2e;--accent:#7aa2ff;--card:#15181b}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:880px;margin:0 auto;padding:56px 20px 96px}
+header{border-bottom:1px solid var(--line);padding-bottom:30px}
+.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.12;letter-spacing:-.02em;margin:.4em 0 .35em;font-weight:700}
+.lead{color:var(--muted);font-size:17px;max-width:64ch;margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:18px;margin:20px 0 0;font-size:13px;color:var(--muted)}
+.stats b{color:var(--ink);font-weight:600}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0}
+.toc a{font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--card)}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+section{margin:56px 0 0;scroll-margin-top:24px}
+h2{font-size:14px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px;margin:0 0 8px;font-weight:600}
+h2 .count{float:right;letter-spacing:0;text-transform:none;font-weight:400}
+h3{font-size:18px;line-height:1.4;margin:0 0 5px;font-weight:600}
+h3 a{color:var(--ink);text-decoration:none}
+h3 a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.item{padding:18px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.meta{font-size:13px;color:var(--muted);margin:0 0 6px}
+.meta .src{color:var(--ink);font-weight:600}
+.note{margin:0;color:var(--ink);max-width:72ch}
+footer{margin-top:72px;border-top:1px solid var(--line);padding-top:26px;font-size:14px;color:var(--muted)}
+footer h2{border:0;padding:0;margin:0 0 14px}
+footer ul{columns:2;column-gap:32px;padding-left:18px;margin:0}
+footer li{margin:0 0 7px;break-inside:avoid}
+footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--accent);border-color:var(--accent)}
+@media(max-width:600px){footer ul{columns:1}main{padding-top:40px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="kicker">Xuan Tuan Nguyen · Engineering Notes</p>
+  <h1>Bài viết so sánh: Java, kiến trúc, hiệu năng, trade-off &amp; POC</h1>
+  <p class="lead">Tuyển chọn từ engineering blog của các công ty product lớn, đọc và đối chiếu trong nhiều năm. Mỗi mục giữ tiêu đề gốc tiếng Anh, kèm ghi chú tiếng Việt và link thẳng tới bài nguồn.</p>
+  <p class="stats"><span><b>33</b> bài viết</span><span><b>17</b> engineering blog</span><span><b>2014–2026</b></span><span>Cập nhật 10/2026</span></p>
+  <nav class="toc">
+    <a href="#java">Java &amp; JVM</a>
+    <a href="#architecture">Kiến trúc</a>
+    <a href="#performance">Hiệu năng</a>
+    <a href="#tradeoffs">Trade-off &amp; scoring</a>
+    <a href="#poc">POC &amp; migration</a>
+    <a href="#sources">Nguồn blog</a>
+  </nav>
+</header>
+
+<section id="java">
+  <h2>Java &amp; JVM <span class="count">5 bài</span></h2>
+
+  <article class="item">
+    <h3><a href="https://netflixtechblog.com/java-21-virtual-threads-dude-wheres-my-lock-3052540e231d" target="_blank" rel="noopener">Java 21 Virtual Threads – Dude, Where’s My Lock?</a></h3>
+    <p class="meta"><span class="src">Netflix TechBlog</span> · 2024</p>
+    <p class="note">Sự cố thật khi bật virtual threads trên Java 21 + Spring Boot/Tomcat: thread dump trông “bình yên” nhưng hàng nghìn virtual thread bị kẹt, service treo. Bài học: virtual threads không miễn phí — phải hiểu pinning, carrier threads và lock.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://netflixtechblog.com/bending-pause-times-to-your-will-with-generational-zgc-256629c9386b" target="_blank" rel="noopener">Bending pause times to your will with Generational ZGC</a></h3>
+    <p class="meta"><span class="src">Netflix TechBlog</span> · 2024</p>
+    <p class="note">So sánh G1 và Generational ZGC bằng số liệu vận hành thật: tail latency, CPU, bộ nhớ — và cả những workload mà ZGC <em>không</em> hợp. Có bảng trade-off thay vì benchmark lý thuyết.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://www.uber.com/blog/JVM%20Profiler/" target="_blank" rel="noopener">JVM Profiler: An Open Source Tool for Tracing Distributed JVM Applications at Scale</a></h3>
+    <p class="meta"><span class="src">Uber Engineering</span> · 2018</p>
+    <p class="note">Uber tự viết Java agent để profile Spark/JVM ở quy mô lớn: đo method, argument, CPU/memory mà không sửa code; giảm 2&nbsp;GB executor memory, tiết kiệm 2&nbsp;TB RAM.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://www.datadoghq.com/blog/datadog-continuous-profiler/" target="_blank" rel="noopener">Analyze code performance in production with Datadog Continuous Profiler</a></h3>
+    <p class="meta"><span class="src">Datadog Engineering</span> · 2020</p>
+    <p class="note">Profiling liên tục trong production: flame graph, so sánh profile giữa các deploy, bắt OOM và lock contention của Java. Góc nhìn vendor nhưng là phần giới thiệu gọn cho continuous profiling.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines" target="_blank" rel="noopener">Benchmarking Apache Kafka: 2 Million Writes Per Second (On Three Cheap Machines)</a></h3>
+    <p class="meta"><span class="src">LinkedIn Engineering</span> · 2014</p>
+    <p class="note">Bài benchmark kinh điển: 2 triệu writes/giây trên 3 máy rẻ. Giải thích vì sao log tuần tự + zero-copy cho throughput cao — nền tảng để hiểu trade-off của Kafka.</p>
+  </article>
+</section>
+
+<section id="architecture">
+  <h2>Kiến trúc <span class="count">7 bài</span></h2>
+
+  <article class="item">
+    <h3><a href="https://www.uber.com/us/en/blog/microservice-architecture/" target="_blank" rel="noopener">Introducing Domain-Oriented Microservice Architecture</a></h3>
+    <p class="meta"><span class="src">Uber Engineering</span> · 2020</p>
+    <p class="note">Từ khoảng 2.200 microservices xuống 70 domain: Uber kể lại quá trình vật lộn với complexity của microservices và cách chia domain / layer / gateway. Bài mẫu mực về trade-off kiến trúc gắn với tổ chức.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/a-pods-architecture-to-allow-shopify-to-scale" target="_blank" rel="noopener">A Pods Architecture To Allow Shopify To Scale</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2018</p>
+    <p class="note">Vì sao Shopify bỏ hướng “một database to hơn”, shard dữ liệu rồi tiến tới kiến trúc pods — đơn vị scale độc lập cho cả hệ thống lẫn team. Đọc kèm “Deconstructing the Monolith” để thấy bức tranh nhiều năm.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://blog.cloudflare.com/d1-control-plane/" target="_blank" rel="noopener">Under the hood, off the hot path: how D1 scales to millions of databases</a></h3>
+    <p class="meta"><span class="src">Cloudflare Blog</span> · 2026</p>
+    <p class="note">Tách control plane khỏi data plane để quản lý hàng triệu database D1 mà query vẫn chạy ở edge. Bài học thiết kế cho hệ multi-tenant quy mô lớn.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development/" target="_blank" rel="noopener">Building Git infrastructure for agent-scale development</a></h3>
+    <p class="meta"><span class="src">GitHub Engineering</span> · 2026</p>
+    <p class="note">Agent viết code làm write traffic vào Git tăng vọt; GitHub mô tả cách thiết kế lại hạ tầng Git để chịu tải “agent-scale”. Góc nhìn rất thời sự về hạ tầng cho AI agents.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://slack.engineering/shipyard-how-we-built-slacks-next-generation-ec2-platform/" target="_blank" rel="noopener">Shipyard: How We Built Slack’s Next-Generation EC2 Platform</a></h3>
+    <p class="meta"><span class="src">Slack Engineering</span> · 2026</p>
+    <p class="note">Slack thay hệ EC2/Chef cũ bằng Shipyard — platform tự phục vụ cho compute. Bài học modernization hạ tầng: abstraction nào cần giữ, cái nào nên bỏ.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://engineering.grab.com/how-grab-builds-and-runs-ai-agents-at-scale" target="_blank" rel="noopener">Agent platform (Part 1): How we help Grab build and run AI agents at scale</a></h3>
+    <p class="meta"><span class="src">Grab Engineering</span> · 2026</p>
+    <p class="note">Grab biến các pain point lặp lại thành platform primitives để team tự build, test và chạy AI agent an toàn. Mô hình “internal agent platform” đáng tham khảo khi agent tràn vào production.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://engineering.fb.com/2026/10/12/video-engineering/shipping-media-over-quic-at-meta-scale-for-instagram-live-ingest/" target="_blank" rel="noopener">Shipping Media Over QUIC at Meta Scale for Instagram Live Ingest</a></h3>
+    <p class="meta"><span class="src">Meta Engineering</span> · 2026</p>
+    <p class="note">Meta chuyển live ingest của Instagram sang Media over QUIC: giảm phức tạp protocol stack, tối ưu streaming real-time ở quy mô lớn.</p>
+  </article>
+</section>
+
+<section id="performance">
+  <h2>Hiệu năng <span class="count">6 bài</span></h2>
+
+  <article class="item">
+    <h3><a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust" target="_blank" rel="noopener">Why Discord is switching from Go to Rust</a></h3>
+    <p class="meta"><span class="src">Discord Engineering</span> · 2020</p>
+    <p class="note">GC của Go tạo spike latency vài trăm ms mỗi vài phút; chuyển Read States sang Rust bỏ được GC, tăng cache, latency phẳng. Bài học chọn ngôn ngữ theo đặc tính workload, không theo trend.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://blog.cloudflare.com/20-percent-internet-upgrade/" target="_blank" rel="noopener">Cloudflare just got faster and more secure, powered by Rust</a></h3>
+    <p class="meta"><span class="src">Cloudflare Blog</span> · 2025</p>
+    <p class="note">Thay lõi NGINX/LuaJIT bằng proxy Rust (Pingora): nhanh hơn khoảng 20% toàn mạng, CPU/RAM giảm mạnh. Case study rewrite có số đo, không phải cảm tính.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://medium.com/@Pinterest_Engineering/open-source-profiler-on-an-internet-scale-fleet-pinterest-and-intel-partnership-on-gprofiler-8fcb387d899c" target="_blank" rel="noopener">Open Source Profiler on an Internet Scale Fleet: Pinterest and Intel Partnership on gProfiler</a></h3>
+    <p class="meta"><span class="src">Pinterest Engineering</span> · 2026</p>
+    <p class="note">Profiling toàn fleet quy mô internet cùng Intel: gProfiler giúp tìm hotspot và regression trên hàng nghìn service. Đọc để biết profiling production được vận hành thế nào.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://github.blog/engineering/architecture-optimization/from-2500-requests-to-24-rebuilding-star-history-without-the-stargazers/" target="_blank" rel="noopener">From 2,500 requests to 24: Rebuilding star history without the stargazers</a></h3>
+    <p class="meta"><span class="src">GitHub Engineering</span> · 2026</p>
+    <p class="note">API star history từ 2.500 request xuống 24 nhờ thiết kế lại cách tổng hợp dữ liệu thay vì trả từng identity. Ví dụ gọn về tối ưu API và database.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/faster-breadth-first-graphql-execution" target="_blank" rel="noopener">Shopify’s journey to faster breadth-first GraphQL execution</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2026</p>
+    <p class="note">Shopify viết lại GraphQL execution theo breadth-first để cắt “chi phí ẩn” của DFS. Bài hiếm hoi đi sâu vào implementation runtime GraphQL.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://engineering.fb.com/2026/10/15/production-engineering/2026-world-cup-record-traffic-reliability-at-scale/" target="_blank" rel="noopener">2026 World Cup: Breaking Records, Spiky Charts and Reliability at Scale</a></h3>
+    <p class="meta"><span class="src">Meta Engineering</span> · 2026</p>
+    <p class="note">World Cup là bài stress test 4 năm một lần: Meta kể cách hạ tầng chịu spike traffic kỷ lục và giữ độ tin cậy.</p>
+  </article>
+</section>
+
+<section id="tradeoffs">
+  <h2>Trade-off &amp; scoring <span class="count">8 bài</span></h2>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/make-great-decisions-quickly-with-tomasp" target="_blank" rel="noopener">Make Great Decisions Quickly with TOMASP</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2019</p>
+    <p class="note">Framework ra quyết định TOMASP: Timebox – Meta – Analyze – Step back. Cách chống analysis paralysis, so sánh pros/cons có kỷ luật và chọn tiêu chí trước khi chọn giải pháp.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity" target="_blank" rel="noopener">Deconstructing the Monolith: Designing Software that Maximizes Developer Productivity</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2019</p>
+    <p class="note">Monolith vs microservices: Shopify chọn modular monolith và nói rõ vì sao — trade-off giữa productivity, deployment và scale. Bài gốc của cả series.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/shopify-monolith" target="_blank" rel="noopener">Under Deconstruction: The State of Shopify’s Monolith</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2020</p>
+    <p class="note">18 tháng sau: cái gì đúng, cái gì phải làm lại — phần “what we’d do differently” rất đáng đọc trước khi chốt kiến trúc.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/media-at-scale-callbacks-vs-pipelines" target="_blank" rel="noopener">Media at Scale: Callbacks vs pipelines</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2020</p>
+    <p class="note">So sánh callback và pipeline cho xử lý media: độ phức tạp, khả năng bảo trì, observability — ví dụ tốt về chọn abstraction theo vòng đời hệ thống.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/" target="_blank" rel="noopener">How we built Pingora, the proxy that connects Cloudflare to the Internet</a></h3>
+    <p class="meta"><span class="src">Cloudflare Blog</span> · 2022</p>
+    <p class="note">Ba lựa chọn: tiếp tục NGINX, fork, hay tự viết proxy. Cloudflare phân tích trade-off rồi chọn Rust; kết quả dùng khoảng 1/3 CPU và 2/3 memory so với hạ tầng cũ.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://stripe.com/blog/api-versioning" target="_blank" rel="noopener">APIs as infrastructure: future-proofing Stripe with versioning</a></h3>
+    <p class="meta"><span class="src">Stripe Engineering</span> · 2017</p>
+    <p class="note">So sánh major version (v1/v2) với rolling date-based versions; trade-off giữa tiến hoá API, chi phí maintain và trải nghiệm developer.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine" target="_blank" rel="noopener">Rewriting the heart of our sync engine</a></h3>
+    <p class="meta"><span class="src">Dropbox Tech</span> · 2020</p>
+    <p class="note">Checklist trước khi rewrite: đã cạn cải tiến tăng dần chưa, có đủ người và thời gian, có chấp nhận chậm feature không. Bài hiếm về quyết định “có nên viết lại” với tiêu chí rõ ràng.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://engineering.atspotify.com/2026/9/why-spotify-is-not-using-bayesian-a-b-testing" target="_blank" rel="noopener">Why Spotify Is Not Using Bayesian A/B Testing</a></h3>
+    <p class="meta"><span class="src">Spotify Engineering</span> · 2026</p>
+    <p class="note">Vì sao Spotify không chuyển sang Bayesian A/B testing: so sánh hai trường phái thống kê và tiêu chí quyết định của họ — đúng chủ đề “trade-off scoring” cho experimentation.</p>
+  </article>
+</section>
+
+<section id="poc">
+  <h2>POC &amp; migration <span class="count">7 bài</span></h2>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/hack-days" target="_blank" rel="noopener">Inside Shopify Hack Days: Building a prototype for music-playing pages</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2026</p>
+    <p class="note">Prototype “music-playing product pages” trong Hack Days — ví dụ về văn hoá thử nhanh, ship thử nghiệm trước khi đầu tư.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://research.google/blog/vibe-coding-xr-accelerating-ai-xr-prototyping-with-xr-blocks-and-gemini/" target="_blank" rel="noopener">Vibe Coding XR: Accelerating AI + XR prototyping with XR Blocks and Gemini</a></h3>
+    <p class="meta"><span class="src">Google Research</span> · 2026</p>
+    <p class="note">Dùng Gemini + XR Blocks để prototype ứng dụng XR nhanh: case study về AI-assisted prototyping.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://shopify.engineering/scaling-inventory-reservations" target="_blank" rel="noopener">We replaced Redis with MySQL for inventory reservations—and it scaled</a></h3>
+    <p class="meta"><span class="src">Shopify Engineering</span> · 2026</p>
+    <p class="note">Bỏ Redis cho inventory reservations, thay bằng MySQL + SKIP LOCKED; đơn giản hơn mà vẫn đạt scale. Bài học: đôi khi lựa chọn “nhàm chán” lại thắng.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://slack.engineering/from-ssh-to-rest-a-security-driven-modernization-of-slacks-emr-data-pipelines/" target="_blank" rel="noopener">From SSH to REST: A Security-Driven Modernization of Slack’s EMR Data Pipelines</a></h3>
+    <p class="meta"><span class="src">Slack Engineering</span> · 2026</p>
+    <p class="note">Hơn 700 SSH operator điều khiển pipeline dữ liệu được thay bằng REST API: modernization vì bảo mật, kèm bài học migration hệ thống đang chạy.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://eng.lyft.com/rerouting-the-stream-how-lyft-moved-to-the-apache-flink-operator-36f20246d250" target="_blank" rel="noopener">Rerouting the Stream: How Lyft Moved to the Apache Flink Operator</a></h3>
+    <p class="meta"><span class="src">Lyft Engineering</span> · 2026</p>
+    <p class="note">Lyft chuyển stream processing sang Apache Flink Operator — kinh nghiệm migration hạ tầng streaming.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://netflixtechblog.com/running-apache-spark-experiments-in-my-sleep-and-on-a-plane-588816b6b5f8" target="_blank" rel="noopener">Running Apache Spark experiments in my sleep (and on a plane)</a></h3>
+    <p class="meta"><span class="src">Netflix TechBlog</span> · 2026</p>
+    <p class="note">Netflix tự động hoá pipeline thí nghiệm Spark để chạy “trong lúc ngủ” — cách biến thử nghiệm định kỳ thành hệ thống.</p>
+  </article>
+
+  <article class="item">
+    <h3><a href="https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90" target="_blank" rel="noopener">Portal by Spotify cut my Claude Code token usage by 90%</a></h3>
+    <p class="meta"><span class="src">Spotify Engineering</span> · 2026</p>
+    <p class="note">Portal giúp giảm 90% token khi dùng Claude Code — thí nghiệm tối ưu chi phí AI coding, đáng tham khảo cho team dùng agent.</p>
+  </article>
+</section>
+
+<footer id="sources">
+  <h2>20 engineering blog nguồn</h2>
+  <ul>
+    <li><a href="https://netflixtechblog.com/" target="_blank" rel="noopener">Netflix TechBlog</a></li>
+    <li><a href="https://www.uber.com/en-US/blog/engineering/" target="_blank" rel="noopener">Uber Engineering</a></li>
+    <li><a href="https://engineering.fb.com/" target="_blank" rel="noopener">Meta Engineering</a></li>
+    <li><a href="https://research.google/blog/" target="_blank" rel="noopener">Google Research</a></li>
+    <li><a href="https://www.linkedin.com/blog/engineering" target="_blank" rel="noopener">LinkedIn Engineering</a></li>
+    <li><a href="https://blog.cloudflare.com/" target="_blank" rel="noopener">Cloudflare Blog</a></li>
+    <li><a href="https://aws.amazon.com/blogs/architecture/" target="_blank" rel="noopener">AWS Architecture</a></li>
+    <li><a href="https://www.datadoghq.com/blog/engineering/" target="_blank" rel="noopener">Datadog Engineering</a></li>
+    <li><a href="https://stripe.com/blog/engineering" target="_blank" rel="noopener">Stripe Engineering</a></li>
+    <li><a href="https://discord.com/category/engineering" target="_blank" rel="noopener">Discord Engineering</a></li>
+    <li><a href="https://slack.engineering/" target="_blank" rel="noopener">Slack Engineering</a></li>
+    <li><a href="https://medium.com/airbnb-engineering" target="_blank" rel="noopener">Airbnb Engineering</a></li>
+    <li><a href="https://engineering.atspotify.com/" target="_blank" rel="noopener">Spotify Engineering</a></li>
+    <li><a href="https://shopify.engineering/" target="_blank" rel="noopener">Shopify Engineering</a></li>
+    <li><a href="https://doordash.engineering/" target="_blank" rel="noopener">DoorDash Engineering</a></li>
+    <li><a href="https://engineering.grab.com/" target="_blank" rel="noopener">Grab Tech Blog</a></li>
+    <li><a href="https://eng.lyft.com/" target="_blank" rel="noopener">Lyft Engineering</a></li>
+    <li><a href="https://github.blog/engineering/" target="_blank" rel="noopener">GitHub Engineering</a></li>
+    <li><a href="https://dropbox.tech/" target="_blank" rel="noopener">Dropbox Tech Blog</a></li>
+    <li><a href="https://medium.com/@Pinterest_Engineering" target="_blank" rel="noopener">Pinterest Engineering</a></li>
+  </ul>
+  <p style="margin-top:18px">Danh sách blog tham khảo từ bài đăng của <a href="https://www.facebook.com/share/p/1CeW4kBCUy/" target="_blank" rel="noopener">Giaosucan</a>. Mọi tiêu đề và link bài viết trỏ trực tiếp về nguồn gốc.</p>
+</footer>
+</main>
+</body>
+</html>
