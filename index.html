@@ -1,196 +1,371 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xuan Tuan Nguyen - CS 472</title>
-  <link href="styleme.css" rel="stylesheet"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tony Nguyen — I build AI tools and prove they work</title>
+<meta name="description" content="Tony Nguyen (Xuan Tuan Nguyen) — software engineer in the Quad Cities building deterministic guardrails for AI-generated code: arcade-agent, agent observability on Cloudflare, and evidence-backed open-source contributions.">
+<link rel="canonical" href="https://tuannx.github.io/">
+<meta name="author" content="Tony Nguyen">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tony Nguyen">
+<meta property="og:title" content="Tony Nguyen — I build AI tools and prove they work">
+<meta property="og:description" content="Deterministic evaluation for AI agents, architecture guardrails for human & AI-generated code, and open-source contributions with receipts.">
+<meta property="og:url" content="https://tuannx.github.io/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tony Nguyen — I build AI tools and prove they work">
+<meta name="twitter:description" content="Deterministic evaluation for AI agents · arcade-agent · Cloudflare observability · OSS with receipts.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Tony Nguyen","alternateName":"Xuan Tuan Nguyen","url":"https://tuannx.github.io/","jobTitle":"Software Engineer","address":{"@type":"PostalAddress","addressRegion":"IL","addressCountry":"US"},"sameAs":["https://github.com/tuannx","https://ai-kit.net"],"knowsAbout":["AI agent evaluation","Model Context Protocol","Software architecture analysis","Java performance","Cloudflare Workers"]}
+</script>
+<style>
+:root{
+  --ink:#f4f6fb; --ink-dim:rgba(235,240,255,.72); --ink-faint:rgba(235,240,255,.52);
+  --glass:rgba(255,255,255,.075);
+  --stroke:rgba(255,255,255,.16); --stroke-soft:rgba(255,255,255,.09);
+  --accent:#8ab4ff; --accent2:#c4a7ff; --accent3:#7fe7d2;
+  --radius:26px; --maxw:1020px;
+  --spring:cubic-bezier(.22,1.36,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ink); background:#070a14; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  min-height:100vh;
+}
+.bg{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(1200px 800px at 80% -10%,#1b2440 0%,transparent 60%),
+  radial-gradient(1000px 700px at -10% 110%,#14203a 0%,transparent 55%),
+  linear-gradient(160deg,#0a0f22 0%,#070a14 55%,#0a0d1d 100%)}
+.orb{position:fixed;z-index:-1;width:44vmax;height:44vmax;border-radius:50%;filter:blur(70px);
+  opacity:.5;pointer-events:none;will-change:transform;top:0;left:0}
+.orb-a{background:radial-gradient(circle at 35% 35%,rgba(96,140,255,.85),rgba(96,140,255,0) 65%)}
+.orb-b{background:radial-gradient(circle at 60% 40%,rgba(168,110,255,.7),rgba(168,110,255,0) 65%);width:36vmax;height:36vmax;opacity:.42}
+.orb-c{background:radial-gradient(circle at 50% 50%,rgba(64,224,196,.5),rgba(64,224,196,0) 65%);width:28vmax;height:28vmax;opacity:.32}
+.grain{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.glass{
+  position:relative;background:var(--glass);border:1px solid var(--stroke-soft);border-radius:var(--radius);
+  -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);
+  box-shadow:0 18px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.03) 28%,transparent 45%),
+             radial-gradient(420px 200px at var(--mx,50%) var(--my,-20%),rgba(255,255,255,.13),transparent 65%);
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glass{background:rgba(23,29,48,.88)}
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+nav.pill{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;
+  display:flex;align-items:center;gap:4px;padding:7px;border-radius:999px;
+  background:rgba(16,20,36,.55);border:1px solid var(--stroke-soft);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+  box-shadow:0 12px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12)}
+nav.pill .brand{font-weight:700;letter-spacing:-.01em;padding:6px 12px 6px 14px;font-size:15px;white-space:nowrap}
+nav.pill .brand span{color:var(--accent)}
+nav.pill a{color:var(--ink-dim);text-decoration:none;font-size:14px;padding:6px 12px;border-radius:999px;transition:color .25s,background .25s;white-space:nowrap}
+nav.pill a:hover{color:var(--ink);background:rgba(255,255,255,.09)}
+@media(max-width:560px){nav.pill a.hide-s{display:none}}
+header.hero{padding:168px 0 30px}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-dim);
+  padding:7px 14px;border-radius:999px;margin-bottom:26px}
+.kicker .dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.5);animation:pulse 2.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.45)}70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+h1{font-size:clamp(44px,7.4vw,78px);line-height:1.04;letter-spacing:-.032em;font-weight:750;max-width:15ch}
+h1 .grad{background:linear-gradient(92deg,var(--accent) 0%,var(--accent2) 48%,var(--accent3) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin-top:24px;font-size:clamp(17px,2.2vw,20px);line-height:1.62;color:var(--ink-dim);max-width:58ch}
+.lede strong{color:var(--ink);font-weight:600}
+.cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;
+  padding:13px 22px;border-radius:999px;color:#0a0f22;background:linear-gradient(120deg,#dbe7ff,#e9e2ff);
+  box-shadow:0 10px 30px rgba(120,150,255,.35),inset 0 1px 0 rgba(255,255,255,.8);will-change:transform}
+.btn.ghost{color:var(--ink);background:var(--glass);border:1px solid var(--stroke);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 10px 30px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15)}
+section{margin:74px 0 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px}
+h2{font-size:13px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink-faint);font-weight:650}
+.sec-head .hint{font-size:13.5px;color:var(--ink-faint)}
+.now{display:grid;gap:14px}
+.now-item{display:flex;gap:16px;align-items:flex-start;padding:20px 22px;border-radius:20px;will-change:transform}
+.now-item .tag{flex:none;font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;margin-top:3px;color:#0a0f22}
+.t-build{background:linear-gradient(120deg,#a9c6ff,#cdb9ff)} .t-ship{background:linear-gradient(120deg,#8ff0da,#b7f5c8)}
+.t-client{background:linear-gradient(120deg,#ffd9a0,#ffc4d6)}
+.now-item p{font-size:15.5px;color:var(--ink-dim);max-width:72ch}
+.now-item p strong{color:var(--ink)}
+.now-item a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(138,180,255,.35)}
+.now-item a:hover{border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.card{padding:26px;border-radius:var(--radius);display:flex;flex-direction:column;gap:10px;min-height:196px;
+  text-decoration:none;color:inherit;will-change:transform;transform-style:preserve-3d}
+.card .meta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--ink-faint);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.card .meta .live{color:#4ade80;text-transform:none;letter-spacing:0;font-weight:600}
+.card h3{font-size:21px;letter-spacing:-.015em;font-weight:680;line-height:1.25}
+.card p{font-size:15px;color:var(--ink-dim);flex:1}
+.card .go{font-size:14px;font-weight:600;color:var(--accent)}
+.card:hover .go{text-decoration:underline;text-underline-offset:3px}
+.proof{display:grid;gap:0;overflow:hidden}
+.proof-row{display:flex;gap:16px;align-items:flex-start;padding:20px 24px;border-bottom:1px solid var(--stroke-soft)}
+.proof-row:last-child{border-bottom:0}
+.chip{flex:none;font-size:11.5px;font-weight:750;letter-spacing:.09em;padding:5px 11px;border-radius:999px;margin-top:2px;color:#0a0f22;background:linear-gradient(120deg,#8ff0da,#c9f7b7)}
+.chip.inv{background:linear-gradient(120deg,#a9c6ff,#e3c8ff)}
+.proof-row p{font-size:15.5px;color:var(--ink-dim)}
+.proof-row p strong{color:var(--ink)}
+.proof-row a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(138,180,255,.35)}
+.proof-row a:hover{border-color:var(--accent)}
+.writing{padding:30px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;text-decoration:none;color:inherit;will-change:transform}
+.writing h3{font-size:24px;letter-spacing:-.02em;font-weight:700;max-width:22ch;line-height:1.3}
+.writing p{color:var(--ink-dim);font-size:15px;margin-top:8px;max-width:52ch}
+.writing .stats{display:flex;gap:26px;flex:none}
+.writing .stats div{text-align:center}
+.writing .stats b{display:block;font-size:27px;letter-spacing:-.02em}
+.writing .stats span{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
+footer{margin:90px 0 46px;padding-top:28px;border-top:1px solid var(--stroke-soft);
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink-faint)}
+footer .links{display:flex;gap:20px;flex-wrap:wrap}
+footer a{color:var(--ink-dim);text-decoration:none}
+footer a:hover{color:var(--ink)}
+.reveal{opacity:0;transform:translateY(26px) scale(.985)}
+.reveal.in{opacity:1;transform:none;transition:opacity .8s ease,transform .9s var(--spring)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
-<div><img src="./my_family.jpg" width="200" height="350" alt="Xuan Tuan Nguyen's family"></div>
-<h1>Xuan Tuan Nguyen - &#128512;&#128513;&#128516;</h1>
-<p style="font-size:1.1em"><a href="/engineering/">Engineering Notes — Java · Architecture · Performance · Trade-offs · POC</a></p>
-<ul>
-  <li>
-    W1D1: Internet, WWW and HTML
-    <ul>
-      <li>
-        <a href="#">Assignment 1: index.html</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W1D2: CSS for styling
-    <ul>
-      <li>
-        <a href="about_me.html">Lab 1: About me</a>
-      </li>
-      <li>
-        <a href="pie.html">Assignment 1: Recipe</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W1D3: CSS for layout
-    <ul>
-      <li>
-        <a href="/lab3/journal.html">Lab 1: Journal</a>
-      </li>
-      <li>
-        <a href="/assignment3/tmnt.html">Assignment 1: TMNT (2007)</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W1D4: HTML Form and Regex
-    <ul>
-      <li>
-        <a href="/day4/lab/index.html">Lab: HTML Form and Regex</a>
-      </li>
-    </ul>
-  </li>
-  <li>Lesson 5</li>
-  <li>
-    W2D1: JavaScript on Browsers (day6)
-    <ul>
-      <li>
-        <a href="/day6/lab1/alarm.html">Lab: Alarm clock</a>
-      </li>
-      <li>
-        <a href="/day6/lab2/tip_calculator.html">Lab: Tip calculator</a>
-      </li>
-      <li>
-        <a href="/day6/assignment/ascii.html">Assignment: Ascii animation</a>
-      </li>
-      <li>
-        <a href="/day6/assignment2/decoratemytext.html">Assignment: Decorate my text</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W2D2: Scope & Closure
-    <ul>
-      <li>
-        <a href="/day7/assignment/bank_account.html">Assignment: Bank account</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W2D4: Ajax and Events
-    <ul>
-      <li>
-        <a href="/day9/exercise/blog.html">Assignment: Blog posts</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W3D2: First Java servlet
-    <ul>
-      <li>
-        <a href="/w3d2/wap-servlet-app.zip">Assignment: Support servlet</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W3D3: State Filters Listeners
-    <ul>
-      <li>
-        <a href="/w3d3/wap-servlet-app-w3d3.zip">Assignment: State Filters Listeners</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    W3D4: Java Server Pages and model view controller 2 architecture
-    <ul>
-      <li>
-        <a href="/w3d4/wap-servlet-app-w3d4.zip">Assignment: Shopping cart (username/password: user/pass)</a>
-      </li>
-    </ul>
-  </li>
-</ul>
-<table>
-  <caption style="font-size: 3em">Course Overview</caption>
-  <thead>
-  <tr>
-    <th style="width: 50px"></th>
-    <th style="width: 100px">Monday</th>
-    <th style="width: 100px">Tuesday</th>
-    <th style="width: 100px">Wednesday</th>
-    <th style="width: 100px">Thursday</th>
-    <th style="width: 100px">Friday</th>
-    <th style="width: 100px">Saturday</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td colspan="7" style="text-align: center">Theme I: HTML and CSS - The Nature of Life is to Grow – Life is
-      structured in layers
-    </td>
-  </tr>
-  <tr>
-    <td>Week 1</td>
-    <td>Web & HTML</td>
-    <td>CSS for Styling</td>
-    <td>Page Layouts using CSS</td>
-    <td>HTML5 Forms & Regular Expressions</td>
-    <td>JavaScript Basics</td>
-    <td>JavaScript Basics cont.</td>
-  </tr>
-  <tr>
-    <td colspan="7" style="text-align: center">Theme II: Client-Side Programming - Purification Leads to Progress
-    </td>
-  </tr>
-  <tr>
-    <td>Week 2</td>
-    <td>JavaScript on Browsers</td>
-    <td>Scope & Closure</td>
-    <td>JavaScript Inheritance</td>
-    <td>Events & AJAX</td>
-    <td>Servlet Intorduction</td>
-    <td>Review</td>
-  </tr>
-  <tr>
-    <td colspan="7" style="text-align: center">Theme III: Server-Side Programming with Servlets and JSP - Every
-      Action has a Reaction
-    </td>
-  </tr>
-  <tr>
-    <td>Week 3</td>
-    <td>Midterm Exam</td>
-    <td>State Management</td>
-    <td>JavaServerPages (JSP)</td>
-    <td>JSP CustomTags Project</td>
-    <td>(JAKSON API)</td>
-    <td>Project</td>
-  </tr>
-  <tr>
-    <td colspan="7" style="text-align: center">Theme IV: Integrating all parts together - The Whole is Greater than
-      the Sum of the Parts
-    </td>
-  </tr>
-  <tr>
-    <td>Week 4</td>
-    <td>Project</td>
-    <td>Project Presentation</td>
-    <td>Review</td>
-    <td>Final Exam</td>
-    <td></td>
-    <td></td>
-  </tr>
-  </tbody>
-</table>
-<footer style="margin-top: 2em">
-  <a href="/">Home</a>
-  <br/>
-  <script>
-    let encodedCurrentUrl = encodeURIComponent(window.location);
-  </script>
-  <a href="javascript:void(window.open('https://validator.w3.org/check?uri='+encodedCurrentUrl, '_blank'));">
-    <img src="w3c-html.png" alt="html validator" referrerpolicy="no-referrer-when-downgrade">
+<div class="bg"></div>
+<div class="orb orb-a" data-depth="1"></div>
+<div class="orb orb-b" data-depth="0.55"></div>
+<div class="orb orb-c" data-depth="0.3"></div>
+<div class="grain"></div>
+
+<nav class="pill" aria-label="Main">
+  <span class="brand">Tony<span>.</span></span>
+  <a href="#now">Now</a>
+  <a href="#work">Work</a>
+  <a href="#proof" class="hide-s">Proof</a>
+  <a href="/engineering/">Writing</a>
+  <a href="https://github.com/tuannx" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker glass"><span class="dot"></span> Quad Cities, IL · Building in public</div>
+  <h1>I build AI tools<br>and <span class="grad">prove they work.</span></h1>
+  <p class="lede">Tony Nguyen — software engineer focused on <strong>deterministic evaluation for AI agents</strong>.
+  Code is cheap now; verification is the scarce part. So every claim I ship maps to evidence you can re-run:
+  a test name, a merged pull request, a live page. <strong>Nothing asserted, everything shown.</strong></p>
+  <div class="cta">
+    <a class="btn magnetic" href="#work">See the work</a>
+    <a class="btn ghost magnetic" href="/engineering/">Engineering Notes →</a>
+  </div>
+</header>
+
+<section id="now">
+  <div class="sec-head"><h2>Now — October 2026</h2><span class="hint">What I'm actively pursuing</span></div>
+  <div class="now">
+    <div class="now-item glass tilt reveal">
+      <span class="tag t-build">Building</span>
+      <p><strong>arcade-agent</strong> — an architectural guardrail for human &amp; AI-generated code:
+      24 MCP tools plus a GitHub Action that reports architecture drift on every pull request.
+      Listed on the official MCP Registry. <a href="https://github.com/tuannx/arcade-agent" target="_blank" rel="noopener">Repo</a> ·
+      <a href="https://arcade-agent.dev" target="_blank" rel="noopener">arcade-agent.dev</a></p>
+    </div>
+    <div class="now-item glass tilt reveal">
+      <span class="tag t-build">Building</span>
+      <p><strong>Eval · Observe · Govern for agents</strong> — deterministic pass / warn / block gates for
+      agent-written work, and a SigNoz-style observability stack that runs entirely on Cloudflare:
+      OTLP ingest in a Rust Worker, AI traces with per-token cost. <a href="https://github.com/tuannx/otel-worker" target="_blank" rel="noopener">otel-worker</a></p>
+    </div>
+    <div class="now-item glass tilt reveal">
+      <span class="tag t-client">Clients</span>
+      <p><strong>AI Kit LLC</strong> — done-for-you AI for local service businesses, bilingual EN / VI:
+      receptionists that never miss a call, no-show reminders, review engines.
+      Current pilot: <strong>RoofGuard Claims</strong>, document-sharing for roofing contractors and
+      insurance claims. <a href="https://ai-kit.net" target="_blank" rel="noopener">ai-kit.net</a> ·
+      <a href="https://roofguard-claims.pages.dev" target="_blank" rel="noopener">RoofGuard</a></p>
+    </div>
+    <div class="now-item glass tilt reveal">
+      <span class="tag t-ship">Shipping</span>
+      <p><strong>Open source, weekly</strong> — contributing where maintainers can check the work:
+      performance and concurrency fixes in Java and Rust ecosystems, plus one new browser mini-game
+      every day. Also in development: <strong>HoloStage VR</strong>, spatial karaoke for Meta Quest.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="sec-head"><h2>Selected work</h2><span class="hint">Live or public — click through and verify</span></div>
+  <div class="grid">
+    <a class="card glass tilt reveal" href="https://github.com/tuannx/arcade-agent" target="_blank" rel="noopener">
+      <div class="meta"><span>AI tooling · MCP</span><span class="live">● Live</span></div>
+      <h3>arcade-agent</h3>
+      <p>Architecture recovery and smell detection for any codebase — tree-sitter parsing, quality metrics,
+      and PR drift reports, exposed as 24 MCP tools and a GitHub Action for AI coding agents and humans alike.</p>
+      <span class="go">github.com/tuannx/arcade-agent →</span>
+    </a>
+    <a class="card glass tilt reveal" href="https://github.com/tuannx/otel-worker" target="_blank" rel="noopener">
+      <div class="meta"><span>Observability · Cloudflare</span><span>Public</span></div>
+      <h3>otel-worker — SigNoz on Cloudflare</h3>
+      <p>OpenTelemetry ingest (traces, logs, metrics) in a Rust Worker, analytics on Iceberg / R2,
+      with GenAI spans and token-cost tracking built in. No ClickHouse, no servers to babysit.</p>
+      <span class="go">github.com/tuannx/otel-worker →</span>
+    </a>
+    <a class="card glass tilt reveal" href="https://github.com/tuannx/servo-devtools-mcp" target="_blank" rel="noopener">
+      <div class="meta"><span>Rust · MCP</span><span>Public</span></div>
+      <h3>servo-devtools-mcp</h3>
+      <p>An MCP server that gives AI agents control of the Servo browser engine — navigation, inspection
+      and the accessibility tree. Think chrome-devtools-mcp, but for Servo. MIT.</p>
+      <span class="go">github.com/tuannx/servo-devtools-mcp →</span>
+    </a>
+    <a class="card glass tilt reveal" href="https://roofguard-claims.pages.dev" target="_blank" rel="noopener">
+      <div class="meta"><span>SaaS · AI Kit LLC</span><span class="live">● Live pilot</span></div>
+      <h3>RoofGuard Claims</h3>
+      <p>Document-sharing between roofing contractors, their clients and insurance carriers —
+      photos, scopes and claim paperwork in one place instead of scattered texts and email threads.</p>
+      <span class="go">roofguard-claims.pages.dev →</span>
+    </a>
+    <a class="card glass tilt reveal" href="https://github.com/tuannx/spring-boot-multi-region-ha" target="_blank" rel="noopener">
+      <div class="meta"><span>Java · Resilience</span><span>Public</span></div>
+      <h3>Multi-region HA lab</h3>
+      <p>A local Spring Boot stack that rehearses AWS multi-region failover — Aurora Global semantics,
+      JDBC failover, event ingestion — so the disaster drill happens on a laptop, not in production.</p>
+      <span class="go">github.com/tuannx/spring-boot-multi-region-ha →</span>
+    </a>
+    <a class="card glass tilt reveal" href="https://tuannx.github.io/daily-mini-games/" target="_blank" rel="noopener">
+      <div class="meta"><span>Daily practice</span><span class="live">● Live</span></div>
+      <h3>Daily Mini-Games</h3>
+      <p>One tiny HTML5 game, designed, built and published every day — vanilla Canvas, zero dependencies.
+      Day 28 and counting. A shipping streak, kept honest by a public catalog.</p>
+      <span class="go">Play the catalog →</span>
+    </a>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="sec-head"><h2>Proof, not promises</h2><span class="hint">Third parties checked this work</span></div>
+  <div class="proof glass reveal">
+    <div class="proof-row">
+      <span class="chip">Merged</span>
+      <p><strong>Stanford CoreNLP</strong> — eliminated an O(N²) quadratic copy in CoreLabel / ArrayCoreMap;
+      merged upstream as <a href="https://github.com/stanfordnlp/CoreNLP/pull/1530" target="_blank" rel="noopener">PR #1530</a> after five review rounds (Oct 2026).</p>
+    </div>
+    <div class="proof-row">
+      <span class="chip inv">Invited</span>
+      <p><strong>Apple ServiceTalk</strong> — root-caused a lost-demand race in
+      <em>PublisherBufferConcurrencyTest</em> (<a href="https://github.com/apple/servicetalk/issues/1672" target="_blank" rel="noopener">issue #1672</a>):
+      stress runs showed 121 lost demands in 200k, zero in 1M with the fix. The maintainer invited an upstream PR.</p>
+    </div>
+    <div class="proof-row">
+      <span class="chip">Adopted</span>
+      <p><strong>arcade-agent in the wild</strong> — the first external adoption of the arcade-agent GitHub Action
+      was merged by the maintainer of elasticsearch-analysis-vietnamese
+      (<a href="https://github.com/duydo/elasticsearch-analysis-vietnamese/pull/168" target="_blank" rel="noopener">PR #168</a>).</p>
+    </div>
+    <div class="proof-row">
+      <span class="chip inv">Upstream</span>
+      <p><strong>Dataverse</strong> — a QuickPerf proof-of-concept that counts database queries in tests,
+      catches N+1s and enforces SQL budgets; the approach was welcomed by the Dataverse team in upstream discussion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="sec-head"><h2>Writing</h2></div>
+  <a class="writing glass tilt reveal" href="/engineering/">
+    <div>
+      <h3>Engineering Notes — Java, architecture, performance &amp; trade-offs</h3>
+      <p>Deep comparative reads from the engineering blogs of Netflix, Uber, Shopify, Cloudflare, Meta and more —
+      each with my notes in Vietnamese and a link straight to the source.</p>
+    </div>
+    <div class="stats">
+      <div><b>33</b><span>articles</span></div>
+      <div><b>17</b><span>eng blogs</span></div>
+      <div><b>2026</b><span>updated</span></div>
+    </div>
   </a>
-  <a href="javascript:void(window.open('https://jigsaw.w3.org/css-validator/validator?uri='+encodedCurrentUrl, '_blank'));">
-    <img src="w3c-css.png" alt="css validator" referrerpolicy="no-referrer-when-downgrade" width="88" height="31">
-  </a>
+</section>
+
+<footer>
+  <span>© 2026 Tony Nguyen · Quad Cities, IL</span>
+  <div class="links">
+    <a href="https://github.com/tuannx" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://ai-kit.net" target="_blank" rel="noopener">AI Kit LLC</a>
+    <a href="/engineering/">Engineering Notes</a>
+    <a href="about_me.html">2021 archive</a>
+  </div>
 </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+  },{threshold:.12}) : null;
+  document.querySelectorAll(".reveal").forEach(function(el){ io ? io.observe(el) : el.classList.add("in"); });
+  if(reduce) return;
+  var px=innerWidth/2, py=innerHeight/3, tx=px, ty=py;
+  var orbs=[].map.call(document.querySelectorAll(".orb"),function(el){
+    return {el:el, x:Math.random()*innerWidth*.6, y:Math.random()*innerHeight*.5,
+            vx:0, vy:0, depth:parseFloat(el.dataset.depth||"0.5"),
+            ox:el.classList.contains("orb-b")? .55 : el.classList.contains("orb-c")? .3 : .05,
+            oy:el.classList.contains("orb-b")? .45 : el.classList.contains("orb-c")? .62 : .08};
+  });
+  addEventListener("pointermove",function(e){ tx=e.clientX; ty=e.clientY; },{passive:true});
+  var tilts=[].map.call(document.querySelectorAll(".tilt"),function(el){
+    var s={el:el,rx:0,ry:0,vx:0,vy:0,trx:0,try_:0};
+    el.addEventListener("pointermove",function(e){
+      var r=el.getBoundingClientRect();
+      var nx=(e.clientX-r.left)/r.width, ny=(e.clientY-r.top)/r.height;
+      s.try_=(nx-.5)*7; s.trx=(.5-ny)*7;
+      el.style.setProperty("--mx",(nx*100)+"%"); el.style.setProperty("--my",(ny*100)+"%");
+    });
+    el.addEventListener("pointerleave",function(){ s.trx=0; s.try_=0; });
+    return s;
+  });
+  var magnets=[].map.call(document.querySelectorAll(".magnetic"),function(el){
+    var s={el:el,x:0,y:0,vx:0,vy:0,tx:0,ty:0};
+    el.addEventListener("pointermove",function(e){
+      var r=el.getBoundingClientRect();
+      s.tx=(e.clientX-(r.left+r.width/2))*.22; s.ty=(e.clientY-(r.top+r.height/2))*.32;
+    });
+    el.addEventListener("pointerleave",function(){ s.tx=0; s.ty=0; });
+    return s;
+  });
+  function spring(cur,vel,target,stiff,damp){ var v=vel+(target-cur)*stiff; v*=damp; return [cur+v,v]; }
+  var t=0;
+  (function loop(){
+    t+=0.008;
+    orbs.forEach(function(o,i){
+      var gx=innerWidth*o.ox + (tx-innerWidth/2)*o.depth*.16 + Math.sin(t*(0.7+i*.23))*26;
+      var gy=innerHeight*o.oy + (ty-innerHeight/2)*o.depth*.16 + Math.cos(t*(0.6+i*.31))*22;
+      var r=spring(o.x,o.vx,gx,0.012,0.90); o.x=r[0]; o.vx=r[1];
+      r=spring(o.y,o.vy,gy,0.012,0.90); o.y=r[0]; o.vy=r[1];
+      o.el.style.transform="translate3d("+(o.x-innerWidth*o.ox)+"px,"+(o.y-innerHeight*o.oy)+"px,0)";
+    });
+    tilts.forEach(function(s){
+      var r=spring(s.rx,s.vx,s.trx,0.09,0.82); s.rx=r[0]; s.vx=r[1];
+      r=spring(s.ry,s.vy,s.try_,0.09,0.82); s.ry=r[0]; s.vy=r[1];
+      s.el.style.transform="perspective(900px) rotateX("+s.rx.toFixed(2)+"deg) rotateY("+s.ry.toFixed(2)+"deg)";
+    });
+    magnets.forEach(function(s){
+      var r=spring(s.x,s.vx,s.tx,0.14,0.78); s.x=r[0]; s.vx=r[1];
+      r=spring(s.y,s.vy,s.ty,0.14,0.78); s.y=r[0]; s.vy=r[1];
+      s.el.style.transform="translate3d("+s.x.toFixed(1)+"px,"+s.y.toFixed(1)+"px,0)";
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
 </body>
 </html>
